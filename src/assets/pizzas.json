@@ -1,0 +1,182 @@
+[
+  {
+    "id": 0,
+    "imageUrl": "https://dodopizza-a.akamaihd.net/static/Img/Products/946b615f1cd14fd983fb7a5a725cd4b3_584x584.jpeg",
+    "title": "Cheeseburger Pizza",
+    "types": [0, 1],
+    "sizes": [26, 30, 40],
+    "price": 12.99,
+    "category": 0,
+    "rating": 10
+  },
+  {
+    "id": 1,
+    "imageUrl": "https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/en-GB/4884b7f2-b2b2-4ba6-80c4-9d1184c14b86.jpg",
+    "title": "Cheesy Chicken",
+    "types": [0],
+    "sizes": [26, 40],
+    "price": 9.99,
+    "category": 0,
+    "rating": 7
+  },
+  {
+    "id": 2,
+    "imageUrl": "https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/en-GB/6b955e38-b275-4ddf-80f0-669ba6e4f1d3.jpg",
+    "title": "Chicken BBQ",
+    "types": [0],
+    "sizes": [26, 40],
+    "price": 12.99,
+    "category": 2,
+    "rating": 10
+  },
+  {
+    "id": 3,
+    "imageUrl": "https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/en-GB/315ae253-c1e0-47ca-a79d-ab18a4ecb8b5.jpg",
+    "title": "Margherita",
+    "types": [1],
+    "sizes": [26, 30, 40],
+    "price": 7.99,
+    "category": 1,
+    "rating": 9
+  },
+  {
+    "id": 4,
+    "imageUrl": "https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/en-GB/9a1f57f0-41f9-4d1d-b1cc-50001ea9ef3f.jpg",
+    "title": "Meaty BBQ",
+    "types": [0, 1],
+    "sizes": [26, 30, 40],
+    "price": 12.99,
+    "category": 2,
+    "rating": 8
+  },
+  {
+    "id": 5,
+    "imageUrl": "https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/en-GB/4038dbb5-a9fc-4f85-bb50-f29e2010661c.jpg",
+    "title": "Pepperoni",
+    "types": [0],
+    "sizes": [30, 40],
+    "price": 8.99,
+    "category": 0,
+    "rating": 8
+  },
+  {
+    "id": 6,
+    "imageUrl": "https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/en-GB/40d605a4-be2e-4bc9-ab77-2bd2232e4e66.jpg",
+    "title": "Super Meaty",
+    "types": [0, 1],
+    "sizes": [26, 30, 40],
+    "price": 9.99,
+    "category": 0,
+    "rating": 9
+  },
+  {
+    "id": 7,
+    "imageUrl": "https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/en-GB/95008a3b-8289-4db3-8879-ba4bca6907aa.jpg",
+    "title": "Veggie Overload",
+    "types": [0, 1],
+    "sizes": [26, 40],
+    "price": 12.99,
+    "category": 1,
+    "rating": 10
+  },
+  {
+    "id": 8,
+    "imageUrl": "https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/en-GB/c48ec1bf-7bd1-46e7-9a2d-6714e27e626a.jpg",
+    "title": "Sweet Chili Chicken",
+    "types": [1],
+    "sizes": [26, 30, 40],
+    "price": 8.99,
+    "category": 4,
+    "rating": 10
+  },
+  {
+    "id": 9,
+    "imageUrl": "https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/en-GB/2903f814-9e73-42ce-bc38-1472ea64c4ff.jpg",
+    "title": "Spicy Mixed Pizza",
+    "types": [0],
+    "sizes": [26, 30, 40],
+    "price": 12.99,
+    "category": 3,
+    "rating": 7
+  },
+  {
+    "id": 10,
+    "imageUrl": "https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/en-GB/09074470-d1bb-4612-a66e-9884b71466a3.jpg",
+    "title": "Shawarma Pizza",
+    "types": [0, 1],
+    "sizes": [30, 40],
+    "price": 12.99,
+    "category": 1,
+    "rating": 10
+  },
+  {
+    "id": 11,
+    "imageUrl": "https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/en-GB/affe754d-a57b-478d-b906-7fc570524cb1.jpg",
+    "title": "Meaty Overload",
+    "types": [0, 1],
+    "sizes": [26, 40],
+    "price": 9.99,
+    "category": 1,
+    "rating": 7
+  },
+  {
+    "id": 12,
+    "imageUrl": "https://dodopizza-a.akamaihd.net/static/Img/Products/f7975622de8343f78a8f97d4af437993_584x584.jpeg",
+    "title": "Chicken Curry",
+    "types": [0],
+    "sizes": [26, 40],
+    "price": 9.99,
+    "category": 1,
+    "rating": 6
+  },
+  {
+    "id": 13,
+    "imageUrl": "https://dodopizza-a.akamaihd.net/static/Img/Products/77f8b70a4f6a4d12b22315955008ece4_584x584.png",
+    "title": "Spicy Sausage",
+    "types": [0, 1],
+    "sizes": [26, 30],
+    "price": 9.99,
+    "category": 3,
+    "rating": 8
+  },
+  {
+    "id": 14,
+    "imageUrl": "https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/en-GB/b1e1bc86-e45b-48e0-ae4c-377ea7bc6902.jpg",
+    "title": "Chicken Supreme",
+    "types": [0, 1],
+    "sizes": [26, 30, 40],
+    "price": 9.99,
+    "category": 0,
+    "rating": 10
+  },
+  {
+    "id": 15,
+    "imageUrl": "https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/en-GB/da36ed1e-1811-4d7e-bc76-995336954bc5.jpg",
+    "title": "Soy Beef",
+    "types": [1],
+    "sizes": [30, 40],
+    "price": 9.99,
+    "category": 1,
+    "rating": 8
+  },
+  {
+    "id": 16,
+    "imageUrl": "https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/en-GB/9c8f86d6-fddb-407a-b5a0-207f63451ddf.jpg",
+    "title": "Soy Chicken",
+    "types": [0, 1],
+    "sizes": [26, 30, 40],
+    "price": 9.99,
+    "category": 1,
+    "rating": 9
+  },
+  {
+    "id": 17,
+    "imageUrl": "https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/en-GB/17ad7a32-af99-409b-afda-baa3740eea4f.jpg",
+    "title": "Hawaiian",
+    "types": [0, 1],
+    "sizes": [26, 40],
+    "price": 12.99,
+    "category": 1,
+    "rating": 10
+  }
+]

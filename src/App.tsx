@@ -1,9 +1,22 @@
 import { FC } from 'react'
 import './scss/app.scss'
+import pizzas from './assets/pizzas.json'
 import Header from './components/Header/Header'
 import Categories from './components/Categories/Categories'
 import Sort from './components/Sort/Sort'
 import PizzaBlock from './components/PizzaBlock/PizzaBlock'
+
+
+export interface IPizza {
+  id: number,
+  imageUrl: string,
+  title: string,
+  types: number[],
+  sizes: number[],
+  price: number,
+  category: number,
+  rating: number
+}
 
 const App: FC = () => {
   return (
@@ -17,15 +30,9 @@ const App: FC = () => {
           </div>
           <h2 className="content__title">All Pizzas</h2>
           <div className="content__items">
-            <PizzaBlock />
-            <PizzaBlock />
-            <PizzaBlock />
-            <PizzaBlock />
-            <PizzaBlock />
-            <PizzaBlock />
-            <PizzaBlock />
-            <PizzaBlock />
-            <PizzaBlock />
+            {
+              pizzas.map((pizza: IPizza) => <PizzaBlock { ...pizza } key={ pizza.id } />)
+            }
           </div>
         </div>
       </div>

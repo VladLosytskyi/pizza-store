@@ -22,7 +22,7 @@
   &__selector {
     display: flex;
     background-color: #f3f3f3;
-    border-radius: 10px;
+    border-radius: 23px;
     flex-direction: column;
     padding: 6px;
 
@@ -44,7 +44,7 @@
         &.active {
           background: #ffffff;
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
-          border-radius: 5px;
+          border-radius: 18px;
           cursor: auto;
         }
       }

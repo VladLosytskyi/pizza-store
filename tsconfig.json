@@ -15,7 +15,7 @@
   },
   "include": [
     "src",
-    "src/declaration.d.ts"
+    "src/@types/declaration.d.ts"
   ],
   "exclude": [
     "node_modules"
