@@ -1,10 +1,10 @@
-import { FC } from 'react'
+import { FC, useEffect, useState } from 'react'
 import './scss/app.scss'
-import pizzas from './assets/pizzas.json'
 import Header from './components/Header/Header'
 import Categories from './components/Categories/Categories'
 import Sort from './components/Sort/Sort'
 import PizzaBlock from './components/PizzaBlock/PizzaBlock'
+import Preloader from './components/common/Preloader/Preloader'
 
 
 export interface IPizza {
@@ -19,8 +19,16 @@ export interface IPizza {
 }
 
 const App: FC = () => {
-  return (
-    <div className="wrapper">
+  const [pizzas, setPizzas] = useState([])
+
+  useEffect(() => {
+    fetch('https://62d909439088313935996943.mockapi.io/pizzas')
+      .then(responce => responce.json())
+      .then(data => setPizzas(data))
+  }, [])
+
+  return !!pizzas
+    ? <div className="wrapper">
       <Header />
       <div className="content">
         <div className="container">
@@ -35,7 +43,7 @@ const App: FC = () => {
         </div>
       </div>
     </div>
-  )
+    : <Preloader />
 }
 
 export default App
