@@ -27,14 +27,14 @@ const PizzaBlock: FC<IPizza> = ({
         <ul>
           { types.map(
             (typeId, index) =>
-              <li className={ activeType === index ? 'active' : '' }
+              <li className={ activeType === index && 'active' }
                   onClick={ () => setActiveType(index) }
                   key={ index }>{ pizzaTypeNames[typeId] }</li>
           ) }
         </ul>
         <ul>
           { sizes.map((size, index) =>
-            <li className={ activeSize === index ? 'active' : '' }
+            <li className={ activeSize === index && 'active'}
                 onClick={ () => setActiveSize(index) }
                 key={ index }>{ size } cm</li>
           ) }

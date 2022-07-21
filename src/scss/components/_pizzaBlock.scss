@@ -36,15 +36,16 @@
 
       li {
         padding: 8px;
+        border-radius: 18px;
         flex: 1;
         cursor: pointer;
         font-weight: 600;
         font-size: 14px;
         @include noselect();
+        transition: background-color 0.1s ease-in-out;
         &.active {
           background: #ffffff;
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
-          border-radius: 18px;
           cursor: auto;
         }
       }

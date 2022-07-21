@@ -7,11 +7,11 @@ const Categories = () => {
   return (
     <div className="categories">
       <ul>
-        {
-          categories.map((category, index) =>
-            <li className={ activeCategoryIndex === index ? 'active' : '' }
-                onClick={ () => setActiveCategoryIndex(index) }>{ category }</li>)
-        }
+        { categories.map((category, index) =>
+          <li className={ activeCategoryIndex === index && 'active' }
+              onClick={ () => setActiveCategoryIndex(index) }
+              key={ index }>{ category }</li>
+        ) }
       </ul>
     </div>
   )

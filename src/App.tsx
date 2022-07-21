@@ -30,9 +30,7 @@ const App: FC = () => {
           </div>
           <h2 className="content__title">All Pizzas</h2>
           <div className="content__items">
-            {
-              pizzas.map((pizza: IPizza) => <PizzaBlock { ...pizza } key={ pizza.id } />)
-            }
+            { pizzas.map((pizza: IPizza) => <PizzaBlock { ...pizza } key={ pizza.id } />) }
           </div>
         </div>
       </div>

@@ -1,13 +1,23 @@
 @import '../variables';
+@import '../libs/normalize';
 
 .sort {
   position: relative;
+
   &__label {
     display: flex;
     align-items: center;
+    cursor: pointer;
+    @include noselect();
 
     svg {
       margin-right: 8px;
+      rotate: 90deg;
+      transition: rotate .1s ease-in-out;
+
+      &.active {
+        rotate: 180deg;
+      }
     }
 
     b {
@@ -16,15 +26,14 @@
 
     span {
       color: $orange;
-      border-bottom: 1px dashed $orange;
-      cursor: pointer;
+      font-weight: bold;
     }
   }
 
   &__popup {
     position: absolute;
     right: 0;
-    margin-top: 15px;
+    margin-top: 10px;
     background: #ffffff;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.09);
     border-radius: 10px;
@@ -34,6 +43,7 @@
 
     ul {
       overflow: hidden;
+
       li {
         padding: 12px 20px;
         cursor: pointer;
