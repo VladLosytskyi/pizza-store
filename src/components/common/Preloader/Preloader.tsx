@@ -2,7 +2,7 @@ import preloader from '../../../assets/images/preloader.svg'
 
 const Preloader = () => {
   return (
-    <div style={ { display: 'flex', justifyContent: 'center', alignItems: 'center', maxWidth: '1000px' } }>
+    <div style={ { margin: 'auto' } }>
       <img src={ preloader } alt='Preloader' />
     </div>
   )

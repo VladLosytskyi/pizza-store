@@ -4,7 +4,7 @@ import Header from './components/Header/Header'
 import Categories from './components/Categories/Categories'
 import Sort from './components/Sort/Sort'
 import PizzaBlock from './components/PizzaBlock/PizzaBlock'
-import Preloader from './components/common/Preloader/Preloader'
+import PizzaBlockPreloader from './components/PizzaBlock/PizzaBlockPreloader'
 
 
 export interface IPizza {
@@ -20,15 +20,20 @@ export interface IPizza {
 
 const App: FC = () => {
   const [pizzas, setPizzas] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
+    setIsLoading(true)
     fetch('https://62d909439088313935996943.mockapi.io/pizzas')
       .then(responce => responce.json())
-      .then(data => setPizzas(data))
+      .then(data => {
+        setPizzas(data)
+        setIsLoading(false)
+      })
   }, [])
 
-  return !!pizzas
-    ? <div className="wrapper">
+  return (
+    <div className="wrapper">
       <Header />
       <div className="content">
         <div className="container">
@@ -38,12 +43,16 @@ const App: FC = () => {
           </div>
           <h2 className="content__title">All Pizzas</h2>
           <div className="content__items">
-            { pizzas.map((pizza: IPizza) => <PizzaBlock { ...pizza } key={ pizza.id } />) }
+            {
+              isLoading
+                ? [...new Array(6)].map((_, index) => <PizzaBlockPreloader key={ index } />)
+                : pizzas.map((pizza: IPizza) => <PizzaBlock { ...pizza } key={ pizza.id } />)
+            }
           </div>
         </div>
       </div>
     </div>
-    : <Preloader />
+  )
 }
 
 export default App
