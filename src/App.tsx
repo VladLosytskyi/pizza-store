@@ -1,10 +1,10 @@
-import { FC, useEffect, useState } from 'react'
+import { FC } from 'react'
+import { Route, Routes } from 'react-router-dom'
 import './scss/app.scss'
 import Header from './components/Header/Header'
-import Categories from './components/Categories/Categories'
-import Sort from './components/Sort/Sort'
-import PizzaBlock from './components/PizzaBlock/PizzaBlock'
-import PizzaBlockPreloader from './components/PizzaBlock/PizzaBlockPreloader'
+import Home from './pages/Home/Home'
+import Cart from './pages/Cart/Cart'
+import NotFound from './pages/NotFound/NotFound'
 
 
 export interface IPizza {
@@ -19,37 +19,15 @@ export interface IPizza {
 }
 
 const App: FC = () => {
-  const [pizzas, setPizzas] = useState([])
-  const [isLoading, setIsLoading] = useState(false)
-
-  useEffect(() => {
-    setIsLoading(true)
-    fetch('https://62d909439088313935996943.mockapi.io/pizzas')
-      .then(responce => responce.json())
-      .then(data => {
-        setPizzas(data)
-        setIsLoading(false)
-      })
-  }, [])
-
   return (
     <div className="wrapper">
       <Header />
       <div className="content">
-        <div className="container">
-          <div className="content__top">
-            <Categories />
-            <Sort />
-          </div>
-          <h2 className="content__title">All Pizzas</h2>
-          <div className="content__items">
-            {
-              isLoading
-                ? [...new Array(6)].map((_, index) => <PizzaBlockPreloader key={ index } />)
-                : pizzas.map((pizza: IPizza) => <PizzaBlock { ...pizza } key={ pizza.id } />)
-            }
-          </div>
-        </div>
+        <Routes>
+          <Route path="/" element={ <Home /> } />
+          <Route path="/cart" element={ <Cart /> } />
+          <Route path="/*" element={ <NotFound /> } />
+        </Routes>
       </div>
     </div>
   )

@@ -48,6 +48,21 @@ body {
       margin: 0;
     }
   }
+
+  &--not-found {
+    margin: 0 auto;
+    max-width: 750px;
+    padding: 100px;
+    text-align: center;
+
+    .content__title {
+      margin: 0;
+    }
+
+    p {
+      font-size: 22px;
+    }
+  }
 }
 
 .cart {
@@ -121,7 +136,6 @@ body {
 
       img {
         width: 80px;
-        height: 80px;
       }
     }
 
@@ -287,11 +301,6 @@ body {
       line-height: 145.4%;
       letter-spacing: 0.01em;
       color: #777777;
-    }
-
-    icon {
-      position: relative;
-      top: 2px;
     }
 
     img {
