@@ -1,10 +1,14 @@
-import { useState } from 'react'
+import { FC, useState } from 'react'
 
 
-const Sort = () => {
-  const sorts = ['popularity', 'price', 'alphabet']
+interface SortProps {
+  sorts: string[]
+  currentSort: number
+  setCurrentSort: (number) => void
+}
+
+const Sort: FC<SortProps> = ({ sorts, currentSort, setCurrentSort }) => {
   const [isPopupVisible, setIsPopupVisible] = useState(false)
-  const [currentSort, setCurrentSort] = useState(0)
 
   const onSortClick = (index) => {
     setCurrentSort(index)

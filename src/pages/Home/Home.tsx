@@ -6,6 +6,12 @@ import PizzaBlockPreloader from '../../components/PizzaBlock/PizzaBlockPreloader
 import { IPizza } from '../../App'
 
 const Home = () => {
+  const categories = ['All', 'Meat', 'Vegan', 'Grill', 'Spicy']
+  const [currentCategory, setCurrentCategory] = useState(0)
+
+  const sorts = ['popularity', 'price', 'alphabet']
+  const [currentSort, setCurrentSort] = useState(0)
+
   const [pizzas, setPizzas] = useState([])
   const [isLoading, setIsLoading] = useState(false)
 
@@ -17,19 +23,24 @@ const Home = () => {
         setPizzas(data)
         setIsLoading(false)
       })
+    window.scrollTo(0, 0)
   }, [])
 
   return (
     <div className="container">
       <div className="content__top">
-        <Categories />
-        <Sort />
+        <Categories categories={ categories }
+                    currentCategory={ currentCategory }
+                    setCurrentCategory={ setCurrentCategory } />
+        <Sort sorts={ sorts }
+              currentSort={ currentSort }
+              setCurrentSort={ setCurrentSort } />
       </div>
       <h2 className="content__title">All Pizzas</h2>
       <div className="content__items">
         {
           isLoading
-            ? [...new Array(6)].map((_, index) => <PizzaBlockPreloader key={ index } />)
+            ? [...new Array(8)].map((_, index) => <PizzaBlockPreloader key={ index } />)
             : pizzas.map((pizza: IPizza) => <PizzaBlock { ...pizza } key={ pizza.id } />)
         }
       </div>

@@ -1,15 +1,20 @@
-import { useState } from 'react'
+import { FC } from 'react'
 
-const Categories = () => {
-  const categories = ['All', 'Meat', 'Vegan', 'Grill', 'Spicy']
-  const [activeCategoryIndex, setActiveCategoryIndex] = useState(0)
+
+interface CategoriesProps {
+  categories: string[]
+  currentCategory: number
+  setCurrentCategory: (number) => void
+}
+
+const Categories: FC<CategoriesProps> = ({ categories, currentCategory, setCurrentCategory }) => {
 
   return (
     <div className="categories">
       <ul>
         { categories.map((category, index) =>
-          <li className={ activeCategoryIndex === index && 'active' }
-              onClick={ () => setActiveCategoryIndex(index) }
+          <li className={ currentCategory === index && 'active' }
+              onClick={ () => setCurrentCategory(index) }
               key={ index }>{ category }</li>
         ) }
       </ul>

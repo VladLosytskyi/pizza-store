@@ -4,6 +4,18 @@
   border-bottom: 1px solid $gray-line;
   padding: 40px 0;
 
+  @media (max-width: 620px) {
+    padding: 20px 0;
+
+    .container {
+      flex-direction: column;
+
+      .header__logo {
+        margin-bottom: 20px;
+      }
+    }
+  }
+
   .container {
     display: flex;
     align-items: center;

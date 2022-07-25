@@ -7,7 +7,7 @@ const Cart = () => {
   const [isEmpty, setIsEmpty] = useState(true)
 
   useEffect(() => {
-    setIsEmpty(true)
+    setIsEmpty(false)
   }, [])
 
   return isEmpty
@@ -45,11 +45,10 @@ const Cart = () => {
               <path d="M8.33337 9.16667V14.1667" stroke="#B6B6B6" />
               <path d="M11.6666 9.16667V14.1667" stroke="#B6B6B6" />
             </svg>
-
             <span>Empty Cart</span>
           </div>
         </div>
-        <div className="content__items">
+        <div className="cart__items">
           <CartItem />
         </div>
         <div className="cart__bottom">

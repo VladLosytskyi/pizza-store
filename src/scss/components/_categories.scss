@@ -26,6 +26,19 @@
         background-color: #282828;
         color: #fff;
       }
+
+      @media (max-width: 430px) {
+        padding: 8px 20px;
+      }
+    }
+  }
+
+  @media (max-width: 880px) {
+    width: 500px;
+    overflow: scroll;
+
+    @media (max-width: 640px) {
+      width: 100%;
     }
   }
 }
