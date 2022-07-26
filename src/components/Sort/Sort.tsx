@@ -1,17 +1,22 @@
 import { FC, useState } from 'react'
 
 
-interface SortProps {
-  sorts: string[]
-  currentSort: number
-  setCurrentSort: (number) => void
+interface ISort {
+  sortName: string,
+  sortProperty: string
 }
 
-const Sort: FC<SortProps> = ({ sorts, currentSort, setCurrentSort }) => {
+interface SortProps {
+  sorts: ISort[]
+  currentSort: ISort
+  onSetCurrentSort: (ISort) => void
+}
+
+const Sort: FC<SortProps> = ({ sorts, currentSort, onSetCurrentSort }) => {
   const [isPopupVisible, setIsPopupVisible] = useState(false)
 
-  const onSortClick = (index) => {
-    setCurrentSort(index)
+  const onSortClick = (sort) => {
+    onSetCurrentSort(sort)
     setIsPopupVisible(false)
   }
 
@@ -25,7 +30,7 @@ const Sort: FC<SortProps> = ({ sorts, currentSort, setCurrentSort }) => {
             fill="#232323" />
         </svg>
         <b>Sort by:</b>
-        <span>{ sorts[currentSort] }</span>
+        <span>{ currentSort.sortName }</span>
       </div>
       {
         isPopupVisible
@@ -33,9 +38,9 @@ const Sort: FC<SortProps> = ({ sorts, currentSort, setCurrentSort }) => {
           <ul>
             { sorts.map(
               (sort, index) =>
-                <li className={ currentSort === index && 'active' }
-                    onClick={ () => onSortClick(index) }
-                    key={ index }>{ sort }</li>
+                <li className={ currentSort.sortName === sort.sortName && 'active' }
+                    onClick={ () => onSortClick(sort) }
+                    key={ index }>{ sort.sortName }</li>
             ) }
           </ul>
         </div>

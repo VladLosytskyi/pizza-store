@@ -4,17 +4,17 @@ import { FC } from 'react'
 interface CategoriesProps {
   categories: string[]
   currentCategory: number
-  setCurrentCategory: (number) => void
+  onSetCurrentCategory: (number) => void
 }
 
-const Categories: FC<CategoriesProps> = ({ categories, currentCategory, setCurrentCategory }) => {
+const Categories: FC<CategoriesProps> = ({ categories, currentCategory, onSetCurrentCategory }) => {
 
   return (
     <div className="categories">
       <ul>
         { categories.map((category, index) =>
           <li className={ currentCategory === index && 'active' }
-              onClick={ () => setCurrentCategory(index) }
+              onClick={ () => onSetCurrentCategory(index) }
               key={ index }>{ category }</li>
         ) }
       </ul>
