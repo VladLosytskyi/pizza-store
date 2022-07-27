@@ -5,7 +5,7 @@ import PizzaBlock from '../../components/PizzaBlock/PizzaBlock'
 import PizzaBlockPreloader from '../../components/PizzaBlock/PizzaBlockPreloader'
 import { IPizza } from '../../App'
 
-const Home = () => {
+const Home = ({ searchValue }) => {
   const categories = ['All', 'Meat', 'Vegan', 'Grill', 'Spicy']
   const [currentCategory, setCurrentCategory] = useState(0)
 
@@ -23,8 +23,8 @@ const Home = () => {
   useEffect(() => {
     setIsLoading(true)
 
-    const filterBy = currentCategory > 0 && `category=${ currentCategory }&`
-    const sortBy = ` sortBy=${ currentSort.sortProperty }&order=${ currentSort.sortOrder } `
+    const filterBy = currentCategory > 0 ? `category=${ currentCategory }&` : ''
+    const sortBy = `sortBy=${ currentSort.sortProperty }&order=${ currentSort.sortOrder }`
 
     fetch(`https://62d909439088313935996943.mockapi.io/pizzas?${ filterBy }${ sortBy }`)
       .then(responce => responce.json())
@@ -33,7 +33,7 @@ const Home = () => {
         setIsLoading(false)
       })
     window.scrollTo(0, 0)
-  }, [currentCategory, currentSort])
+  }, [currentCategory, currentSort, searchValue])
 
   return (
     <div className="container">
@@ -50,7 +50,9 @@ const Home = () => {
         {
           isLoading
             ? [...new Array(8)].map((_, index) => <PizzaBlockPreloader key={ index } />)
-            : pizzas.map((pizza: IPizza) => <PizzaBlock { ...pizza } key={ pizza.id } />)
+            : pizzas
+              .filter((pizza: IPizza) => !!pizza.title.toLowerCase().includes(searchValue.toLowerCase()))
+              .map((pizza: IPizza) => <PizzaBlock { ...pizza } key={ pizza.id } />)
         }
       </div>
     </div>

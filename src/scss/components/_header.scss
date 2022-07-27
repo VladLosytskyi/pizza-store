@@ -4,7 +4,7 @@
   border-bottom: 1px solid $gray-line;
   padding: 40px 0;
 
-  @media (max-width: 620px) {
+  @media (max-width: 1000px) {
     padding: 20px 0;
 
     .container {
@@ -12,6 +12,10 @@
 
       .header__logo {
         margin-bottom: 20px;
+      }
+
+      .button--cart {
+        margin-top: 20px;
       }
     }
   }

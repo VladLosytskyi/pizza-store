@@ -7,9 +7,7 @@ const PizzaBlock: FC<IPizza> = ({
                                   imageUrl,
                                   types,
                                   sizes,
-                                  price,
-                                  // category,
-                                  // rating
+                                  price
                                 }) => {
   const [activeType, setActiveType] = useState(0)
   const [activeSize, setActiveSize] = useState(0)

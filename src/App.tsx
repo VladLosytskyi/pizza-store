@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import './scss/app.scss'
 import Header from './components/Header/Header'
@@ -19,12 +19,14 @@ export interface IPizza {
 }
 
 const App: FC = () => {
+  const [search, setSearch] = useState({ search: '' })
+
   return (
     <div className="wrapper">
-      <Header />
+      <Header search={ search } setSearch={ setSearch } />
       <div className="content">
         <Routes>
-          <Route path="/" element={ <Home /> } />
+          <Route path="/" element={ <Home searchValue={ search.search } /> } />
           <Route path="/cart" element={ <Cart /> } />
           <Route path="/*" element={ <NotFound /> } />
         </Routes>
