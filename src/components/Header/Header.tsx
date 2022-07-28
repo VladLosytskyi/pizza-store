@@ -4,16 +4,7 @@ import logo from '../../assets/images/pizza-logo.svg'
 import PizzaSearchForm from '../PizzaSearch/PizzaSearchForm'
 
 
-export interface ISearchValue {
-  search: string
-}
-
-interface HeaderProps {
-  search: ISearchValue
-  setSearch: (ISearchValue) => void
-}
-
-const Header: FC<HeaderProps> = ({ search, setSearch }) => {
+const Header: FC = () => {
   return (
     <div className="header">
       <div className="container">
@@ -24,7 +15,7 @@ const Header: FC<HeaderProps> = ({ search, setSearch }) => {
             <p>The tastiest pizza in the universe</p>
           </div>
         </Link>
-        <PizzaSearchForm search={ search } setSearch={ setSearch } />
+        <PizzaSearchForm />
         <div className="header__cart">
           <Link to="/cart" className="button button--cart">
             <span>$19.98</span>

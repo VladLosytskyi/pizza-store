@@ -1,24 +1,21 @@
-import { FC } from 'react'
+import { FC, useContext } from 'react'
 import { Field, Form, Formik } from 'formik'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faXmark } from '@fortawesome/free-solid-svg-icons'
 import classes from './PizzaSearchForm.module.scss'
-import { ISearchValue } from '../Header/Header'
+import { SearchContext } from '../../App'
 
 
-interface PizzaSearchFormProps {
-  search: ISearchValue
-  setSearch: (ISearchValue) => void
-}
+const PizzaSearchForm: FC = () => {
+  const { search, setSearch } = useContext(SearchContext)
 
-const PizzaSearchForm: FC<PizzaSearchFormProps> = ({ search, setSearch }) => {
   const submit = (values, { setSubmitting }) => {
-    setSearch({ search: values.search })
+    setSearch(values.search)
     setSubmitting(false)
   }
 
   return (
-    <Formik initialValues={ search } onSubmit={ submit }>
+    <Formik initialValues={ { search } } onSubmit={ submit }>
       { ({ values, isSubmitting }) => (
         <Form className={ classes.pizzaSearchForm }>
           <FontAwesomeIcon icon={ faSearch } className={ classes.pizzaSearchFormIcon } />

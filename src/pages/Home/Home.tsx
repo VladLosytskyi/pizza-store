@@ -1,11 +1,13 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import Categories from '../../components/Categories/Categories'
 import Sort from '../../components/Sort/Sort'
 import PizzaBlock from '../../components/PizzaBlock/PizzaBlock'
 import PizzaBlockPreloader from '../../components/PizzaBlock/PizzaBlockPreloader'
-import { IPizza } from '../../App'
+import { IPizza, SearchContext } from '../../App'
 
-const Home = ({ searchValue }) => {
+const Home = () => {
+  const { search } = useContext(SearchContext)
+
   const categories = ['All', 'Meat', 'Vegan', 'Grill', 'Spicy']
   const [currentCategory, setCurrentCategory] = useState(0)
 
@@ -33,7 +35,7 @@ const Home = ({ searchValue }) => {
         setIsLoading(false)
       })
     window.scrollTo(0, 0)
-  }, [currentCategory, currentSort, searchValue])
+  }, [currentCategory, currentSort, search])
 
   return (
     <div className="container">
@@ -51,7 +53,7 @@ const Home = ({ searchValue }) => {
           isLoading
             ? [...new Array(8)].map((_, index) => <PizzaBlockPreloader key={ index } />)
             : pizzas
-              .filter((pizza: IPizza) => !!pizza.title.toLowerCase().includes(searchValue.toLowerCase()))
+              .filter((pizza: IPizza) => !!pizza.title.toLowerCase().includes(search.toLowerCase()))
               .map((pizza: IPizza) => <PizzaBlock { ...pizza } key={ pizza.id } />)
         }
       </div>
