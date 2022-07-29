@@ -1,23 +1,18 @@
 import { useContext, useEffect, useState } from 'react'
 import Categories from '../../components/Categories/Categories'
-import Sort from '../../components/Sort/Sort'
-import PizzaBlock from '../../components/PizzaBlock/PizzaBlock'
+import Sorts from '../../components/Sorts/Sorts'
+import PizzaBlock, { IPizza } from '../../components/PizzaBlock/PizzaBlock'
 import PizzaBlockPreloader from '../../components/PizzaBlock/PizzaBlockPreloader'
-import { IPizza, SearchContext } from '../../App'
+import { SearchContext } from '../../App'
+import { useAppSelector } from '../../redux/hooks'
+import { selectCurrentCategory } from '../../redux/slices/categoriesSlice'
+import { selectCurrentSort } from '../../redux/slices/sortsSlice'
 
 const Home = () => {
   const { search } = useContext(SearchContext)
 
-  const categories = ['All', 'Meat', 'Vegan', 'Grill', 'Spicy']
-  const [currentCategory, setCurrentCategory] = useState(0)
-
-  const sorts = [
-    { sortName: 'popularity', sortProperty: 'rating', sortOrder: 'desc' },
-    { sortName: 'price (low to high)', sortProperty: 'price', sortOrder: 'asc' },
-    { sortName: 'price (high to low)', sortProperty: 'price', sortOrder: 'desc' },
-    { sortName: 'alphabet', sortProperty: 'title', sortOrder: 'asc' }
-  ]
-  const [currentSort, setCurrentSort] = useState(sorts[0])
+  const currentCategory = useAppSelector(selectCurrentCategory)
+  const currentSort = useAppSelector(selectCurrentSort)
 
   const [pizzas, setPizzas] = useState([])
   const [isLoading, setIsLoading] = useState(false)
@@ -40,12 +35,8 @@ const Home = () => {
   return (
     <div className="container">
       <div className="content__top">
-        <Categories categories={ categories }
-                    currentCategory={ currentCategory }
-                    onSetCurrentCategory={ setCurrentCategory } />
-        <Sort sorts={ sorts }
-              currentSort={ currentSort }
-              onSetCurrentSort={ setCurrentSort } />
+        <Categories />
+        <Sorts />
       </div>
       <h2 className="content__title">All Pizzas</h2>
       <div className="content__items">

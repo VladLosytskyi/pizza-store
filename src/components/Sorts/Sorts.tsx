@@ -1,22 +1,18 @@
 import { FC, useState } from 'react'
+import { useAppDispatch, useAppSelector } from '../../redux/hooks'
+import { selectCurrentSort, selectSorts, setCurrentSort } from '../../redux/slices/sortsSlice'
 
 
-interface ISort {
-  sortName: string,
-  sortProperty: string
-}
-
-interface SortProps {
-  sorts: ISort[]
-  currentSort: ISort
-  onSetCurrentSort: (ISort) => void
-}
-
-const Sort: FC<SortProps> = ({ sorts, currentSort, onSetCurrentSort }) => {
+const Sorts: FC = () => {
   const [isPopupVisible, setIsPopupVisible] = useState(false)
 
+  const sorts = useAppSelector(selectSorts)
+  const currentSort = useAppSelector(selectCurrentSort)
+
+  const dispatch = useAppDispatch()
+
   const onSortClick = (sort) => {
-    onSetCurrentSort(sort)
+    dispatch(setCurrentSort(sort))
     setIsPopupVisible(false)
   }
 
@@ -49,4 +45,4 @@ const Sort: FC<SortProps> = ({ sorts, currentSort, onSetCurrentSort }) => {
   )
 }
 
-export default Sort
+export default Sorts

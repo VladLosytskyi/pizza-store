@@ -1,20 +1,20 @@
 import { FC } from 'react'
+import { useAppDispatch, useAppSelector } from '../../redux/hooks'
+import { selectCategories, selectCurrentCategory, setCurrentCategory } from '../../redux/slices/categoriesSlice'
 
 
-interface CategoriesProps {
-  categories: string[]
-  currentCategory: number
-  onSetCurrentCategory: (number) => void
-}
+const Categories: FC = () => {
+  const categories = useAppSelector(selectCategories)
+  const currentCategory = useAppSelector(selectCurrentCategory)
 
-const Categories: FC<CategoriesProps> = ({ categories, currentCategory, onSetCurrentCategory }) => {
+  const dispatch = useAppDispatch()
 
   return (
     <div className="categories">
       <ul>
         { categories.map((category, index) =>
           <li className={ currentCategory === index && 'active' }
-              onClick={ () => onSetCurrentCategory(index) }
+              onClick={ () => dispatch(setCurrentCategory(index)) }
               key={ index }>{ category }</li>
         ) }
       </ul>

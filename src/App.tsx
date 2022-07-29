@@ -7,17 +7,6 @@ import Cart from './pages/Cart/Cart'
 import NotFound from './pages/NotFound/NotFound'
 
 
-export interface IPizza {
-  id: number,
-  imageUrl: string,
-  title: string,
-  types: number[],
-  sizes: number[],
-  price: number,
-  category: number,
-  rating: number
-}
-
 export const SearchContext = createContext<{ search?: string, setSearch?: (search: string) => void }>({})
 
 const App: FC = () => {

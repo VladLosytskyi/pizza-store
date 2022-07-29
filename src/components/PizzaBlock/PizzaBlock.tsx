@@ -1,6 +1,15 @@
 import { FC, useState } from 'react'
-import { IPizza } from '../../App'
 
+export interface IPizza {
+  id: number,
+  imageUrl: string,
+  title: string,
+  types: number[],
+  sizes: number[],
+  price: number,
+  category: number,
+  rating: number
+}
 
 const PizzaBlock: FC<IPizza> = ({
                                   title,
