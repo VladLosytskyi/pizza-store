@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { useContext, useEffect, useState } from 'react'
 import Categories from '../../components/Categories/Categories'
 import Sorts from '../../components/Sorts/Sorts'
@@ -23,10 +24,10 @@ const Home = () => {
     const filterBy = currentCategory > 0 ? `category=${ currentCategory }&` : ''
     const sortBy = `sortBy=${ currentSort.sortProperty }&order=${ currentSort.sortOrder }`
 
-    fetch(`https://62d909439088313935996943.mockapi.io/pizzas?${ filterBy }${ sortBy }`)
-      .then(responce => responce.json())
-      .then(data => {
-        setPizzas(data)
+    axios
+      .get(`https://62d909439088313935996943.mockapi.io/pizzas?${ filterBy }${ sortBy }`)
+      .then(response => {
+        setPizzas(response.data)
         setIsLoading(false)
       })
     window.scrollTo(0, 0)
