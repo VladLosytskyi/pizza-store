@@ -1,4 +1,4 @@
-import { FC, useContext } from 'react'
+import { FC, useContext, useRef } from 'react'
 import { Field, Form, Formik } from 'formik'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faXmark } from '@fortawesome/free-solid-svg-icons'
@@ -8,23 +8,29 @@ import { SearchContext } from '../../App'
 
 const PizzaSearchForm: FC = () => {
   const { search, setSearch } = useContext(SearchContext)
+  const inputRef = useRef<HTMLInputElement>(null)
 
   const submit = (values, { setSubmitting }) => {
     setSearch(values.search)
     setSubmitting(false)
   }
 
+  const onResetButtonClick = (resetForm) => {
+    resetForm({ values: { search: '' } })
+    inputRef.current.focus()
+  }
+
   return (
     <Formik initialValues={ { search } } onSubmit={ submit }>
-      { ({ values, isSubmitting }) => (
+      { ({ values, isSubmitting, resetForm }) => (
         <Form className={ classes.pizzaSearchForm }>
           <FontAwesomeIcon icon={ faSearch } className={ classes.pizzaSearchFormIcon } />
-          <Field type="search" name="search" placeholder="Search Pizzas..." className={ !values.search
+          <Field innerRef={ inputRef } type="search" name="search" placeholder="Search Pizzas..." className={ !values.search
             ? classes.pizzaSearchFormInput
             : `${ classes.pizzaSearchFormInput } ${ classes.pizzaSearchFormInputWithReset }` } />
           {
             !!values.search &&
-            <button type="reset" className={ classes.pizzaSearchFormButtonNullstyle }>
+            <button onClick={ () => onResetButtonClick(resetForm) } className={ classes.pizzaSearchFormButtonNullstyle }>
               <FontAwesomeIcon icon={ faXmark } className={ classes.pizzaSearchFormButtonReset } />
             </button>
           }
