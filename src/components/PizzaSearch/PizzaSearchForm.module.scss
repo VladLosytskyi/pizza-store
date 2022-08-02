@@ -5,7 +5,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 320px;
+  width: 300px;
   height: 40px;
 
   &Input {
@@ -13,22 +13,22 @@
     height: 100%;
     font-size: 15px;
     color: $black;
-    margin: 0 -80px 0 -18px;
-    padding: 0 85px 0 40px;
+    margin: 0 0 0 -18px;
+    padding: 0 0 0 40px;
     background-color: #f9f9f9;
     border: none;
     border-radius: 20px;
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 6px 8px #00000026;
     transition: box-shadow 0.3s ease;
 
     &WithReset {
-      margin: 0 -105px 0 -18px;
-      padding: 0 110px 0 40px;
+      margin: 0 -25px 0 -18px;
+      padding: 0 20px 0 40px;
     }
 
     &:focus,
     &WithReset:focus, {
-      box-shadow: 0 3px 4px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 3px 4px #00000026;
     }
 
     @media (max-width: 430px) {
@@ -49,43 +49,26 @@
   }
 
   &Button {
-    color: #fff;
-    background-color: $orange;
-    border-radius: 30px;
-    padding: 8px 18px;
-    text-align: center;
-    cursor: pointer;
-    transition: background-color $duration ease-in-out, border-color $duration ease-in-out;
-    border: 1px solid transparent;
-    @include noselect();
-
-    &Nullstyle {
-      background-color: transparent;
-      border: none;
-    }
 
     &Reset {
+      background-color: transparent;
+      border: none;
       height: 25px;
       width: 25px;
-      color: $black;
+      color: #8b8b8b;
       position: relative;
-      top: 2px;
-      right: 5px;
+      right: 10px;
       cursor: pointer;
-    }
 
-    &:hover {
-      background-color: darken($orange, 8%);
-    }
+      svg {
+        height: 100%;
+        width: 100%;
+        transition: color $duration ease-in-out;
 
-    &:active {
-      background-color: darken($orange, 12%);
-      transform: translateY(1px);
-    }
-
-    &:disabled {
-      color: darken(#fff, 15%);
-      background-color: darken($orange, 15%);
+        &:hover {
+          color: $black;
+        }
+      }
     }
   }
 }

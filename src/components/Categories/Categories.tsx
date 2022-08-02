@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
-import { selectCategories, selectCurrentCategory, setCurrentCategory } from '../../redux/slices/categoriesSlice'
+import { selectCategories, selectCurrentCategory, setCurrentCategory } from '../../redux/slices/filterSlice'
 
 
 const Categories: FC = () => {

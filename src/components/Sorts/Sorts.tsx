@@ -1,6 +1,6 @@
 import { FC, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
-import { selectCurrentSort, selectSorts, setCurrentSort } from '../../redux/slices/sortsSlice'
+import { selectCurrentSort, selectSorts, setCurrentSort } from '../../redux/slices/filterSlice'
 
 
 const Sorts: FC = () => {
@@ -11,7 +11,7 @@ const Sorts: FC = () => {
 
   const dispatch = useAppDispatch()
 
-  const onSortClick = (sort) => {
+  const onSortClick = (sort: number) => {
     dispatch(setCurrentSort(sort))
     setIsPopupVisible(false)
   }
@@ -26,7 +26,9 @@ const Sorts: FC = () => {
             fill="#232323" />
         </svg>
         <b>Sort by:</b>
-        <span>{ currentSort.sortName }</span>
+        <span>{
+          sorts[currentSort].sortName
+        }</span>
       </div>
       {
         isPopupVisible
@@ -34,8 +36,8 @@ const Sorts: FC = () => {
           <ul>
             { sorts.map(
               (sort, index) =>
-                <li className={ currentSort.sortName === sort.sortName && 'active' }
-                    onClick={ () => onSortClick(sort) }
+                <li className={ sorts[currentSort].sortName === sort.sortName && 'active' }
+                    onClick={ () => onSortClick(sort.id) }
                     key={ index }>{ sort.sortName }</li>
             ) }
           </ul>

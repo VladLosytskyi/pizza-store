@@ -1,4 +1,4 @@
-import { createContext, FC, useState } from 'react'
+import { FC } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import './scss/app.scss'
 import Header from './components/Header/Header'
@@ -7,14 +7,9 @@ import Cart from './pages/Cart/Cart'
 import NotFound from './pages/NotFound/NotFound'
 
 
-export const SearchContext = createContext<{ search?: string, setSearch?: (search: string) => void }>({})
-
 const App: FC = () => {
-  const [search, setSearch] = useState('')
-
   return (
     <div className="wrapper">
-      <SearchContext.Provider value={ { search, setSearch } }>
         <Header />
         <div className="content">
           <Routes>
@@ -23,7 +18,6 @@ const App: FC = () => {
             <Route path="/*" element={ <NotFound /> } />
           </Routes>
         </div>
-      </SearchContext.Provider>
     </div>
   )
 }

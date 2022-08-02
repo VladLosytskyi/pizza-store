@@ -1,43 +1,50 @@
-import { FC, useContext, useRef } from 'react'
-import { Field, Form, Formik } from 'formik'
+import debounce from 'lodash.debounce'
+import { ChangeEvent, FC, useRef, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faXmark } from '@fortawesome/free-solid-svg-icons'
 import classes from './PizzaSearchForm.module.scss'
-import { SearchContext } from '../../App'
+import { useAppDispatch } from '../../redux/hooks'
+import { setSearchValue } from '../../redux/slices/filterSlice'
 
 
 const PizzaSearchForm: FC = () => {
-  const { search, setSearch } = useContext(SearchContext)
+  const [value, setValue] = useState('')
   const inputRef = useRef<HTMLInputElement>(null)
 
-  const submit = (values, { setSubmitting }) => {
-    setSearch(values.search)
-    setSubmitting(false)
+  const dispatch = useAppDispatch()
+
+  const onResetButtonClick = () => {
+    dispatch(setSearchValue(''))
+    setValue('')
+    inputRef.current?.focus()
   }
 
-  const onResetButtonClick = (resetForm) => {
-    resetForm({ values: { search: '' } })
-    inputRef.current.focus()
-  }
+  const updateSearchValue = debounce((str: string) => {
+    dispatch(setSearchValue(str))
+  }, 250)
 
+  const onInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setValue(event.target.value)
+    updateSearchValue(event.target.value)
+  }
   return (
-    <Formik initialValues={ { search } } onSubmit={ submit }>
-      { ({ values, isSubmitting, resetForm }) => (
-        <Form className={ classes.pizzaSearchForm }>
-          <FontAwesomeIcon icon={ faSearch } className={ classes.pizzaSearchFormIcon } />
-          <Field innerRef={ inputRef } type="search" name="search" placeholder="Search Pizzas..." className={ !values.search
-            ? classes.pizzaSearchFormInput
-            : `${ classes.pizzaSearchFormInput } ${ classes.pizzaSearchFormInputWithReset }` } />
-          {
-            !!values.search &&
-            <button onClick={ () => onResetButtonClick(resetForm) } className={ classes.pizzaSearchFormButtonNullstyle }>
-              <FontAwesomeIcon icon={ faXmark } className={ classes.pizzaSearchFormButtonReset } />
-            </button>
-          }
-          <button type="submit" disabled={ isSubmitting } className={ classes.pizzaSearchFormButton }>Search</button>
-        </Form>
-      ) }
-    </Formik>
+    <div className={ classes.pizzaSearchForm }>
+      <FontAwesomeIcon icon={ faSearch } className={ classes.pizzaSearchFormIcon } />
+      <input ref={ inputRef }
+             type="search"
+             placeholder="Search Pizzas..."
+             value={ value }
+             onChange={ onInputChange }
+             className={ !value
+               ? classes.pizzaSearchFormInput
+               : `${ classes.pizzaSearchFormInput } ${ classes.pizzaSearchFormInputWithReset }` } />
+      {
+        !!value &&
+        <button onClick={ onResetButtonClick } className={ classes.pizzaSearchFormButtonReset }>
+          <FontAwesomeIcon icon={ faXmark } />
+        </button>
+      }
+    </div>
   )
 }
 
