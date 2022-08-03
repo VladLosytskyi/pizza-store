@@ -18,10 +18,14 @@ const Sorts: FC = () => {
     setIsPopupVisible(false)
   }
 
+  const onOutOfSortClick = (event: MouseEvent) => {
+    !event.composedPath().includes(sortRef.current) && setIsPopupVisible(false)
+  }
+
   useEffect(() => {
-    document.body.addEventListener('click',event => {
-      !event.composedPath().includes(sortRef.current) && setIsPopupVisible(false)
-    })
+    document.body.addEventListener('click', onOutOfSortClick)
+
+    return () => document.body.removeEventListener('click', onOutOfSortClick)
   }, [])
 
   return (
