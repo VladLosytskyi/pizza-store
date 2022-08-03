@@ -13,7 +13,7 @@ const Categories: FC = () => {
     <div className="categories">
       <ul>
         { categories.map((category, index) =>
-          <li className={ currentCategory === index && 'active' }
+          <li className={ currentCategory === index ? 'active' : undefined }
               onClick={ () => dispatch(setCurrentCategory(index)) }
               key={ index }>{ category }</li>
         ) }
