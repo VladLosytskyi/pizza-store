@@ -210,6 +210,22 @@ body {
             display: none;
           }
         }
+
+        &:disabled {
+          background-color: #fff;
+          border-color: #ddd;
+
+          &,
+          span {
+            color: #ddd;
+          }
+
+          svg {
+            path {
+              fill: #ddd;
+            }
+          }
+        }
       }
 
       b {

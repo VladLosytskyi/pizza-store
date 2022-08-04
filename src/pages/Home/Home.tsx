@@ -59,7 +59,7 @@ const Home = () => {
       dispatch(setFilters({ search, category, currentSort }))
       setIsSearch(true)
     } else {
-      dispatch(setFilters( {search: '', category: 0, currentSort: 0} ))
+      dispatch(setFilters({ search: '', category: 0, currentSort: 0 }))
     }
   }, [dispatch, location.search, sorts])
   useEffect(() => {
@@ -81,7 +81,7 @@ const Home = () => {
       navigate(`?${ queryString }`)
     }
     setIsMounted(true)
-  }, [isMounted, currentCategory, currentSort, navigate, searchValue, sorts])
+  }, [currentCategory, currentSort, navigate, searchValue, sorts])
 
 
   return (

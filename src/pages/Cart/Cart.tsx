@@ -1,16 +1,27 @@
-import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import emptyCart from '../../assets/images/empty-cart.png'
 import CartItem from './CartItem'
+import {
+  clearCart,
+  selectPreorderedPizzas,
+  selectPreorderedPizzasCount,
+  selectTotalPrice
+} from '../../redux/slices/cartSlice'
 
 const Cart = () => {
-  const [isEmpty, setIsEmpty] = useState(true)
+  const preorderedPizzas = useAppSelector(selectPreorderedPizzas)
+  const preorderedPizzasCount = useAppSelector(selectPreorderedPizzasCount)
+  const totalPrice = useAppSelector(selectTotalPrice)
 
-  useEffect(() => {
-    setIsEmpty(false)
-  }, [])
+  const dispatch = useAppDispatch()
 
-  return isEmpty
+  const onClearCartClick = () => {
+    window.confirm('Are you sure you want to empty the cart?') &&
+    dispatch(clearCart())
+  }
+
+  return !totalPrice
     ? <div className="container container--cart">
       <div className="cart cart--empty">
         <h2>The cart is empty 😕</h2>
@@ -36,7 +47,7 @@ const Cart = () => {
             </svg>
             Cart
           </h2>
-          <div className="cart__clear">
+          <div className="cart__clear" onClick={ onClearCartClick }>
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M2.5 5H4.16667H17.5" stroke="#B6B6B6" />
               <path
@@ -49,12 +60,14 @@ const Cart = () => {
           </div>
         </div>
         <div className="cart__items">
-          <CartItem />
+          {
+            preorderedPizzas.map(pizza => <CartItem { ...pizza } key={ pizza.id } />)
+          }
         </div>
         <div className="cart__bottom">
           <div className="cart__bottom-details">
-            <span> Pizzas <b>3 шт.</b> </span>
-            <span> Order price: <b>900 ₽</b> </span>
+            <span>Pizzas count: <b> { preorderedPizzasCount }</b></span>
+            <span>Order price: <b> ${ totalPrice }</b></span>
           </div>
           <div className="cart__bottom-buttons">
             <Link to="/" className="button button--outline button--add go-back-btn">

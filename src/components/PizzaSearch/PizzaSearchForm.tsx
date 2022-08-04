@@ -1,15 +1,17 @@
 import debounce from 'lodash.debounce'
-import { ChangeEvent, FC, useRef, useState } from 'react'
+import { ChangeEvent, FC, useEffect, useRef, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faXmark } from '@fortawesome/free-solid-svg-icons'
 import classes from './PizzaSearchForm.module.scss'
-import { useAppDispatch } from '../../redux/hooks'
-import { setSearchValue } from '../../redux/slices/filterSlice'
+import { useAppDispatch, useAppSelector } from '../../redux/hooks'
+import { selectSearchValue, setSearchValue } from '../../redux/slices/filterSlice'
 
 
 const PizzaSearchForm: FC = () => {
-  const [value, setValue] = useState('')
+  const searchValue = useAppSelector(selectSearchValue)
+  const [value, setValue] = useState(searchValue)
   const inputRef = useRef<HTMLInputElement>(null)
+  const [isMounted, setIsMounted] = useState(false)
 
   const dispatch = useAppDispatch()
 
@@ -27,6 +29,14 @@ const PizzaSearchForm: FC = () => {
     setValue(event.target.value)
     updateSearchValue(event.target.value)
   }
+
+  useEffect(() => {
+    if (!isMounted){
+      setValue(searchValue)
+    }
+    setIsMounted(true)
+  }, [searchValue])
+
   return (
     <div className={ classes.pizzaSearchForm }>
       <FontAwesomeIcon icon={ faSearch } className={ classes.pizzaSearchFormIcon } />
