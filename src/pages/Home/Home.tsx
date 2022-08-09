@@ -13,15 +13,14 @@ import {
   selectSorts,
   setFilters
 } from '../../redux-toolkit/slices/filterSlice'
-import { fetchPizzas, selectPizzas, selectStatus } from '../../redux-toolkit/slices/pizzasSlice'
+import { useGetPizzasQuery } from '../../redux-toolkit/api/pizzasApi'
 
 const Home = () => {
   const searchValue = useAppSelector(selectSearchValue)
   const currentCategory = useAppSelector(selectCurrentCategory)
   const sorts = useAppSelector(selectSorts)
   const currentSort = useAppSelector(selectCurrentSort)
-  const pizzas = useAppSelector(selectPizzas)
-  const status = useAppSelector(selectStatus)
+  const [pizzas, setPizzas] = useState<IPizza[]>([])
 
   const [isSearch, setIsSearch] = useState(false)
   const [isMounted, setIsMounted] = useState(false)
@@ -30,6 +29,12 @@ const Home = () => {
 
   const navigate = useNavigate()
   const location = useLocation()
+
+  const { data, isError, isLoading } = useGetPizzasQuery({
+    category: currentCategory,
+    sortProperty: sorts[currentSort].sortProperty,
+    sortOrder: sorts[currentSort].sortOrder
+  })
 
 
   useEffect(() => {
@@ -50,15 +55,11 @@ const Home = () => {
     }
   }, [dispatch, location.search, sorts])
   useEffect(() => {
-    !isSearch && dispatch(fetchPizzas({
-      category: currentCategory,
-      sortProperty: sorts[currentSort].sortProperty,
-      sortOrder: sorts[currentSort].sortOrder
-    }))
+    !isSearch && data && setPizzas(data)
 
     setIsSearch(false)
     window.scrollTo(0, 0)
-  }, [dispatch, isSearch, searchValue, currentCategory, sorts, currentSort])
+  }, [dispatch, data, isSearch, searchValue, currentCategory, sorts, currentSort])
   useEffect(() => {
     if (isMounted){
       const queryString = qs.stringify({
@@ -81,7 +82,7 @@ const Home = () => {
       </div>
       <h2 className="content__title">All Pizzas</h2>
       {
-        status === 'rejected'
+        isError
           ? <div className="container container--not-found">
             <h1 className="content__title"><span>😕</span> Some Error Occured</h1>
             <p>Unfortunately, couldn't get pizzas.</p>
@@ -89,7 +90,7 @@ const Home = () => {
           </div>
           : <div className="content__items">
             {
-              status === 'pending'
+              isLoading
                 ? [...new Array(8)].map((_, index) => <PizzaBlockPreloader key={ index } />)
                 : pizzas
                   .filter((pizza: IPizza) => !!pizza.title.toLowerCase().includes(searchValue.toLowerCase()))
