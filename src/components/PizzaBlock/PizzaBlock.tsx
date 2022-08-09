@@ -1,6 +1,6 @@
 import { FC, useState } from 'react'
-import { useAppDispatch } from '../../redux/hooks'
-import { addPizza } from '../../redux/slices/cartSlice'
+import { useAppDispatch } from '../../redux-toolkit/hooks'
+import { addPizza } from '../../redux-toolkit/slices/cartSlice'
 
 
 export interface IPizza {
@@ -56,7 +56,6 @@ const PizzaBlock: FC<IPizza> = ({
           <ul>
             { pizzaTypes.map((type, index) =>
               <button className={ activeType === index ? 'active' : undefined }
-                      disabled={ type === 'Thin' && activeSize === 0 }
                       onClick={ () => setActiveType(index) }
                       key={ index }>{ type }</button>
             ) }

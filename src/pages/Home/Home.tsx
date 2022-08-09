@@ -1,29 +1,28 @@
 import qs from 'qs'
-import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import Categories from '../../components/Categories/Categories'
 import Sorts from '../../components/Sorts/Sorts'
 import PizzaBlock, { IPizza } from '../../components/PizzaBlock/PizzaBlock'
 import PizzaBlockPreloader from '../../components/PizzaBlock/PizzaBlockPreloader'
-import { useAppDispatch, useAppSelector } from '../../redux/hooks'
+import { useAppDispatch, useAppSelector } from '../../redux-toolkit/hooks'
 import {
-  ISort,
   selectCurrentCategory,
   selectCurrentSort,
   selectSearchValue,
   selectSorts,
   setFilters
-} from '../../redux/slices/filterSlice'
+} from '../../redux-toolkit/slices/filterSlice'
+import { fetchPizzas, selectPizzas, selectStatus } from '../../redux-toolkit/slices/pizzasSlice'
 
 const Home = () => {
   const searchValue = useAppSelector(selectSearchValue)
   const currentCategory = useAppSelector(selectCurrentCategory)
   const sorts = useAppSelector(selectSorts)
   const currentSort = useAppSelector(selectCurrentSort)
+  const pizzas = useAppSelector(selectPizzas)
+  const status = useAppSelector(selectStatus)
 
-  const [pizzas, setPizzas] = useState([])
-  const [isLoading, setIsLoading] = useState(false)
   const [isSearch, setIsSearch] = useState(false)
   const [isMounted, setIsMounted] = useState(false)
 
@@ -32,18 +31,6 @@ const Home = () => {
   const navigate = useNavigate()
   const location = useLocation()
 
-
-  const fetchPizzas = (currentCategory: number, sorts: ISort[], currentSort: number) => {
-    const filterBy = currentCategory > 0 ? `category=${ currentCategory }&` : ''
-    const sortBy = `sortBy=${ sorts[currentSort].sortProperty }&order=${ sorts[currentSort].sortOrder }`
-
-    axios
-      .get(`https://62d909439088313935996943.mockapi.io/pizzas?${ filterBy }${ sortBy }`)
-      .then(response => {
-        setPizzas(response.data)
-        setIsLoading(false)
-      })
-  }
 
   useEffect(() => {
     if (location.search){
@@ -63,13 +50,15 @@ const Home = () => {
     }
   }, [dispatch, location.search, sorts])
   useEffect(() => {
-    setIsLoading(true)
-
-    !isSearch && fetchPizzas(currentCategory, sorts, currentSort)
+    !isSearch && dispatch(fetchPizzas({
+      category: currentCategory,
+      sortProperty: sorts[currentSort].sortProperty,
+      sortOrder: sorts[currentSort].sortOrder
+    }))
 
     setIsSearch(false)
     window.scrollTo(0, 0)
-  }, [isSearch, searchValue, currentCategory, sorts, currentSort])
+  }, [dispatch, isSearch, searchValue, currentCategory, sorts, currentSort])
   useEffect(() => {
     if (isMounted){
       const queryString = qs.stringify({
@@ -91,15 +80,23 @@ const Home = () => {
         <Sorts />
       </div>
       <h2 className="content__title">All Pizzas</h2>
-      <div className="content__items">
-        {
-          isLoading
-            ? [...new Array(8)].map((_, index) => <PizzaBlockPreloader key={ index } />)
-            : pizzas
-              .filter((pizza: IPizza) => !!pizza.title.toLowerCase().includes(searchValue.toLowerCase()))
-              .map((pizza: IPizza) => <PizzaBlock { ...pizza } key={ pizza.id } />)
-        }
-      </div>
+      {
+        status === 'rejected'
+          ? <div className="container container--not-found">
+            <h1 className="content__title"><span>😕</span> Some Error Occured</h1>
+            <p>Unfortunately, couldn't get pizzas.</p>
+            <p>Please, try again later.</p>
+          </div>
+          : <div className="content__items">
+            {
+              status === 'pending'
+                ? [...new Array(8)].map((_, index) => <PizzaBlockPreloader key={ index } />)
+                : pizzas
+                  .filter((pizza: IPizza) => !!pizza.title.toLowerCase().includes(searchValue.toLowerCase()))
+                  .map((pizza: IPizza) => <PizzaBlock { ...pizza } key={ pizza.id } />)
+            }
+          </div>
+      }
     </div>
   )
 }

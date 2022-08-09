@@ -3,8 +3,8 @@ import { ChangeEvent, FC, useEffect, useRef, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faXmark } from '@fortawesome/free-solid-svg-icons'
 import classes from './PizzaSearchForm.module.scss'
-import { useAppDispatch, useAppSelector } from '../../redux/hooks'
-import { selectSearchValue, setSearchValue } from '../../redux/slices/filterSlice'
+import { useAppDispatch, useAppSelector } from '../../redux-toolkit/hooks'
+import { selectSearchValue, setSearchValue } from '../../redux-toolkit/slices/filterSlice'
 
 
 const PizzaSearchForm: FC = () => {

@@ -2,8 +2,8 @@ import { FC } from 'react'
 import { Link } from 'react-router-dom'
 import logo from '../../assets/images/pizza-logo.svg'
 import PizzaSearchForm from '../PizzaSearch/PizzaSearchForm'
-import { useAppSelector } from '../../redux/hooks'
-import { selectPreorderedPizzasCount, selectTotalPrice } from '../../redux/slices/cartSlice'
+import { useAppSelector } from '../../redux-toolkit/hooks'
+import { selectPreorderedPizzasCount, selectTotalPrice } from '../../redux-toolkit/slices/cartSlice'
 
 
 const Header: FC = () => {

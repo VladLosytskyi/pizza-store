@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { useAppDispatch, useAppSelector } from '../../redux/hooks'
+import { useAppDispatch, useAppSelector } from '../../redux-toolkit/hooks'
 import emptyCart from '../../assets/images/empty-cart.png'
 import CartItem from './CartItem'
 import {
@@ -7,7 +7,7 @@ import {
   selectPreorderedPizzas,
   selectPreorderedPizzasCount,
   selectTotalPrice
-} from '../../redux/slices/cartSlice'
+} from '../../redux-toolkit/slices/cartSlice'
 
 const Cart = () => {
   const preorderedPizzas = useAppSelector(selectPreorderedPizzas)

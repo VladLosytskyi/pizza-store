@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { IPizza } from '../../components/PizzaBlock/PizzaBlock'
-import { useAppDispatch } from '../../redux/hooks'
-import { addPizza, removeAllPizzasOfType, removePizza } from '../../redux/slices/cartSlice'
+import { useAppDispatch } from '../../redux-toolkit/hooks'
+import { addPizza, removeAllPizzasOfType, removePizza } from '../../redux-toolkit/slices/cartSlice'
 
 const CartItem: FC<IPizza> = ({
                                 id,

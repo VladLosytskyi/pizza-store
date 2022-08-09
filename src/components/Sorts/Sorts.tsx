@@ -1,6 +1,6 @@
 import { FC, useEffect, useRef, useState } from 'react'
-import { useAppDispatch, useAppSelector } from '../../redux/hooks'
-import { selectCurrentSort, selectSorts, setCurrentSort } from '../../redux/slices/filterSlice'
+import { useAppDispatch, useAppSelector } from '../../redux-toolkit/hooks'
+import { selectCurrentSort, selectSorts, setCurrentSort } from '../../redux-toolkit/slices/filterSlice'
 
 
 const Sorts: FC = () => {
