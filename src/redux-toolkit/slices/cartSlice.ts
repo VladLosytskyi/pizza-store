@@ -30,7 +30,7 @@ export const cartSlice = createSlice({
         : state.preorderedPizzas.push({ ...action.payload, count: 1 })
 
       state.totalPrice = state.preorderedPizzas.reduce(
-        (sum, pizza) => sum + (pizza.currentPrice * pizza.count)
+        (sum, pizza) => Math.round((sum + (pizza.currentPrice * pizza.count) + Number.EPSILON) * 100) / 100
         , 0)
     },
     removePizza: (state, action: PayloadAction<IPizza>) => {
@@ -41,7 +41,7 @@ export const cartSlice = createSlice({
       ).count--
 
       state.totalPrice = state.preorderedPizzas.reduce(
-        (sum, pizza) => sum + (pizza.currentPrice * pizza.count)
+        (sum, pizza) => Math.round((sum + (pizza.currentPrice * pizza.count) + Number.EPSILON) * 100) / 100
         , 0)
     },
     removeAllPizzasOfType: (state, action: PayloadAction<IPizza>) => {
@@ -52,7 +52,7 @@ export const cartSlice = createSlice({
       )
 
       state.totalPrice = state.preorderedPizzas.reduce(
-        (sum, pizza) => sum + (pizza.currentPrice * pizza.count)
+        (sum, pizza) => Math.round((sum + (pizza.currentPrice * pizza.count) + Number.EPSILON) * 100) / 100
         , 0)
     },
     clearCart: (state) => {
