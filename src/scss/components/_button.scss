@@ -56,6 +56,8 @@
   &--outline {
     background-color: #fff;
     border-color: $orange;
+    transition: all $duration ease-in-out;
+
     &,
     span {
       color: $orange;
@@ -100,14 +102,99 @@
     align-items: center;
     justify-content: center;
     margin-top: 15px;
+    border-color: $orange;
+    background-color: #fff;
+    //transition: all 3s ease-in-out;
 
     svg {
       margin-right: 2px;
     }
 
+    .cross {
+      position: relative;
+      right: 8px;
+      width: 15px;
+      height: 12px;
+
+      &:before,
+      &:after {
+        position: absolute;
+        left: 12px;
+        content: '';
+        height: 12px;
+        width: 2px;
+        background-color: $orange;
+        transition: all $duration ease-in-out;
+        border-radius: 1px;
+      }
+
+      &:before {
+        transform: rotate(90deg);
+      }
+    }
+
     span {
       font-weight: 600;
       font-size: 16px;
+      color: $orange;
+    }
+
+    &:hover {
+
+      .cross:before,
+      .cross:after {
+        background-color: #fff;
+      }
+    }
+  }
+
+  &--added {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+    border-color: $green;
+    background-color: $green;
+
+    svg {
+      margin-right: 2px;
+    }
+
+    .cross {
+      position: relative;
+      right: 8px;
+      width: 15px;
+      height: 12px;
+
+      &:before,
+      &:after {
+        position: absolute;
+        content: '';
+        width: 2px;
+        background-color: #fff;
+        transition: all $duration ease-in-out;
+        border-radius: 1px;
+      }
+
+      &:before {
+        height: 13px;
+        top: -2px;
+        left: 12px;
+        transform: rotate(35deg);
+      }
+
+      &:after {
+        height: 8px;
+        top: 3px;
+        left: 7px;
+        transform: rotate(-30deg);
+      }
+    }
+
+    span {
+      font-weight: 600;
+      font-size: 16px;
+      color: #fff;
     }
   }
 
