@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import logo from '../../assets/images/pizza-logo.svg'
 import PizzaSearchForm from '../PizzaSearch/PizzaSearchForm'
 import { useAppSelector } from '../../redux-toolkit/hooks'
@@ -9,6 +9,8 @@ import { selectPreorderedPizzasCount, selectTotalPrice } from '../../redux-toolk
 const Header: FC = () => {
   const totalPrice = useAppSelector(selectTotalPrice)
   const preorderedPizzasCount = useAppSelector(selectPreorderedPizzasCount)
+
+  const location = useLocation()
 
   return (
     <div className="header">
@@ -20,7 +22,7 @@ const Header: FC = () => {
             <p>The tastiest pizza in the universe</p>
           </div>
         </Link>
-        <PizzaSearchForm />
+        { location.pathname !== '/cart' && <PizzaSearchForm /> }
         <div className="header__cart">
           <Link to="/cart" className="button button--cart">
             <span>$ { totalPrice }</span>

@@ -41,6 +41,7 @@ const PizzaBlock: FC<IPizza> = ({
       size: pizzaSizes[activeSize],
       type: pizzaTypes[activeType]
     }))
+
   }
 
   return (

@@ -23,9 +23,7 @@ const CartItem: FC<IPizza> = ({
   }
 
   const onRemoveAllOfTypeClick = () => {
-    if (window.confirm('Are you sure you want to remove these pizzas?')){
-      dispatch(removeAllPizzasOfType({ id, title, imageUrl, currentPrice, size, type }))
-    }
+    dispatch(removeAllPizzasOfType({ id, title, imageUrl, currentPrice, size, type }))
   }
 
   return (

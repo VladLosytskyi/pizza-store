@@ -89,16 +89,20 @@ const Home = () => {
             <p>Please, try again later.</p>
           </div>
           : isLoading
-            ? [...new Array(8)].map((_, index) => <PizzaBlockPreloader key={ index } />)
+            ? <div className="content__items">
+              { [...new Array(8)].map((_, index) => <PizzaBlockPreloader key={ index } />) }
+            </div>
             : pizzas
               .filter((pizza: IPizza) => !!pizza.title.toLowerCase().includes(searchValue.toLowerCase()))
               .length
               ? <div className="content__items">
-                { pizzas.map((pizza: IPizza) => <PizzaBlock { ...pizza } key={ pizza.id } />) }
+                { pizzas
+                  .filter((pizza: IPizza) => !!pizza.title.toLowerCase().includes(searchValue.toLowerCase()))
+                  .map((pizza: IPizza) => <PizzaBlock { ...pizza } key={ pizza.id } />) }
               </div>
               : <div className="container container--not-found">
                 <h1 className="content__title"><span>😕</span> No Pizzas Found</h1>
-                <p>Change your search query and try again.</p>
+                <p>Change search query or category and try again.</p>
               </div>
       }
     </div>
