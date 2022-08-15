@@ -9,7 +9,7 @@ const Sorts: FC = () => {
   const sorts = useAppSelector(selectSorts)
   const currentSort = useAppSelector(selectCurrentSort)
 
-  const sortRef = useRef(null)
+  const sortRef = useRef<HTMLDivElement>(null)
 
   const dispatch = useAppDispatch()
 

@@ -4,6 +4,7 @@
   max-width: 100%;
   text-align: center;
   margin-top: 50px;
+  transition: all .2s ease-in-out;
 
   &-wrapper {
     display: flex;
@@ -56,5 +57,9 @@
         }
       }
     }
+  }
+
+  &:hover {
+    transform: scale(1.03);
   }
 }

@@ -259,6 +259,7 @@ body {
         &:disabled {
           background-color: #fff;
           border-color: #ddd;
+          cursor: not-allowed;
 
           &,
           span {

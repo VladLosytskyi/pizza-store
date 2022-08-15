@@ -30,12 +30,11 @@ const Home = () => {
   const navigate = useNavigate()
   const location = useLocation()
 
-  const { data, isError, isLoading } = useGetPizzasQuery({
+  const { data, isError } = useGetPizzasQuery({
     category: currentCategory,
     sortProperty: sorts[currentSort].sortProperty,
     sortOrder: sorts[currentSort].sortOrder
   })
-
 
   useEffect(() => {
     if (location.search){
@@ -45,9 +44,7 @@ const Home = () => {
         sortBy,
         order
       } = qs.parse(location.search.substring(1)) as unknown as { search: string, category: number, sortBy: string, order: string }
-      const currentSort = sorts.find(sort =>
-        sort.sortProperty === sortBy
-        && sort.sortOrder === order).id
+      const currentSort = sorts.find(sort => sort.sortProperty === sortBy && sort.sortOrder === order).id
       dispatch(setFilters({ search, category, currentSort }))
       setIsSearch(true)
     } else {
@@ -55,7 +52,9 @@ const Home = () => {
     }
   }, [dispatch, location.search, sorts])
   useEffect(() => {
-    !isSearch && data && setPizzas(data)
+    !isSearch && data && setPizzas(data.filter(
+      (pizza: IPizza) => !!pizza.title.toLowerCase().includes(searchValue.toLowerCase()))
+    )
 
     setIsSearch(false)
     window.scrollTo(0, 0)
@@ -80,7 +79,7 @@ const Home = () => {
         <Categories />
         <Sorts />
       </div>
-      <h2 className="content__title">All Pizzas</h2>
+      <h2 className="content__title">Pizzas</h2>
       {
         isError
           ? <div className="container container--not-found">
@@ -88,17 +87,15 @@ const Home = () => {
             <p>Unfortunately, couldn't get pizzas.</p>
             <p>Please, try again later.</p>
           </div>
-          : isLoading
+          : !pizzas.length
             ? <div className="content__items">
               { [...new Array(8)].map((_, index) => <PizzaBlockPreloader key={ index } />) }
             </div>
-            : pizzas
-              .filter((pizza: IPizza) => !!pizza.title.toLowerCase().includes(searchValue.toLowerCase()))
-              .length
+            : !!pizzas.length
               ? <div className="content__items">
-                { pizzas
-                  .filter((pizza: IPizza) => !!pizza.title.toLowerCase().includes(searchValue.toLowerCase()))
-                  .map((pizza: IPizza) => <PizzaBlock { ...pizza } key={ pizza.id } />) }
+                {
+                  pizzas.map((pizza: IPizza) => <PizzaBlock { ...pizza } key={ pizza.id } />)
+                }
               </div>
               : <div className="container container--not-found">
                 <h1 className="content__title"><span>😕</span> No Pizzas Found</h1>

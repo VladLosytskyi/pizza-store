@@ -24,7 +24,7 @@ const PizzaBlock: FC<IPizza> = ({
                                 }) => {
   const [activeType, setActiveType] = useState(0)
   const [activeSize, setActiveSize] = useState(0)
-  const [isClicked, setIsClicked] = useState(false)
+  const [isGreen, setIsGreen] = useState(false)
 
   const pizzaTypes = ['Original', 'Thin']
   const pizzaSizes = [25, 30, 35]
@@ -34,8 +34,8 @@ const PizzaBlock: FC<IPizza> = ({
 
 
   const onAddClick = () => {
-    setIsClicked(true)
-    setTimeout(() => setIsClicked(false), 1000)
+    setIsGreen(true)
+    setTimeout(() => setIsGreen(false), 1000)
     dispatch(addPizza({
       id,
       title,
@@ -72,13 +72,13 @@ const PizzaBlock: FC<IPizza> = ({
           </ul>
         </div>
         <button
-          className={ !isClicked
+          className={ !isGreen
             ? 'button button--outline button--add'
             : 'button button--added' }
-          disabled={ isClicked }
+          disabled={ isGreen }
           onClick={ onAddClick }>
           {
-            isClicked
+            isGreen
               ? <>
                 <span className="cross" />
                 <span>Added To Cart</span>
