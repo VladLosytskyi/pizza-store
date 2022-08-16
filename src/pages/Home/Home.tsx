@@ -20,10 +20,11 @@ const Home = () => {
   const currentCategory = useAppSelector(selectCurrentCategory)
   const sorts = useAppSelector(selectSorts)
   const currentSort = useAppSelector(selectCurrentSort)
-  const [pizzas, setPizzas] = useState<IPizza[]>([])
 
+  const [pizzas, setPizzas] = useState<IPizza[]>([])
   const [isSearch, setIsSearch] = useState(false)
   const [isMounted, setIsMounted] = useState(false)
+  const [isLoaded, setIsLoaded] = useState(false)
 
   const dispatch = useAppDispatch()
 
@@ -52,9 +53,10 @@ const Home = () => {
     }
   }, [dispatch, location.search, sorts])
   useEffect(() => {
-    !isSearch && data && setPizzas(data.filter(
-      (pizza: IPizza) => !!pizza.title.toLowerCase().includes(searchValue.toLowerCase()))
-    )
+    if(!isSearch && data){
+      setPizzas(data.filter((pizza: IPizza) => !!pizza.title.toLowerCase().includes(searchValue.toLowerCase())))
+      setIsLoaded(true)
+    }
 
     setIsSearch(false)
     window.scrollTo(0, 0)
@@ -87,7 +89,7 @@ const Home = () => {
             <p>Unfortunately, couldn't get pizzas.</p>
             <p>Please, try again later.</p>
           </div>
-          : !pizzas.length
+          : !isLoaded
             ? <div className="content__items">
               { [...new Array(8)].map((_, index) => <PizzaBlockPreloader key={ index } />) }
             </div>
