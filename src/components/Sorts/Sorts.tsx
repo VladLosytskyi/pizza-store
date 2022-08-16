@@ -1,9 +1,9 @@
-import { FC, useEffect, useRef, useState } from 'react'
+import { FC, memo, useEffect, useRef, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../redux-toolkit/hooks'
 import { selectCurrentSort, selectSorts, setCurrentSort } from '../../redux-toolkit/slices/filterSlice'
 
 
-const Sorts: FC = () => {
+const Sorts: FC = memo(() => {
   const [isPopupVisible, setIsPopupVisible] = useState(false)
 
   const sorts = useAppSelector(selectSorts)
@@ -57,6 +57,6 @@ const Sorts: FC = () => {
       }
     </div>
   )
-}
+})
 
 export default Sorts

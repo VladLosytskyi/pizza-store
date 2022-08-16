@@ -1,9 +1,9 @@
-import { FC } from 'react'
+import { FC, memo } from 'react'
 import { useAppDispatch, useAppSelector } from '../../redux-toolkit/hooks'
 import { selectCategories, selectCurrentCategory, setCurrentCategory } from '../../redux-toolkit/slices/filterSlice'
 
 
-const Categories: FC = () => {
+const Categories: FC = memo(() => {
   const categories = useAppSelector(selectCategories)
   const currentCategory = useAppSelector(selectCurrentCategory)
 
@@ -20,6 +20,6 @@ const Categories: FC = () => {
       </ul>
     </div>
   )
-}
+})
 
 export default Categories
