@@ -1,16 +1,31 @@
-import { FC, memo } from 'react'
+import { FC, memo, useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import logo from '../../assets/images/pizza-logo.svg'
 import PizzaSearchForm from '../PizzaSearch/PizzaSearchForm'
 import { useAppSelector } from '../../redux-toolkit/hooks'
-import { selectPreorderedPizzasCount, selectTotalPrice } from '../../redux-toolkit/slices/cartSlice'
+import {
+  selectPreorderedPizzas,
+  selectPreorderedPizzasCount,
+  selectTotalPrice
+} from '../../redux-toolkit/slices/cartSlice'
 
 
 const Header: FC = memo(() => {
+  const [isMounted, setIsMounted] = useState(false)
+
   const totalPrice = useAppSelector(selectTotalPrice)
+  const preorderedPizzas = useAppSelector(selectPreorderedPizzas)
   const preorderedPizzasCount = useAppSelector(selectPreorderedPizzasCount)
 
   const location = useLocation()
+
+  useEffect(() => {
+    if (isMounted){
+      const payload = JSON.stringify(preorderedPizzas)
+      localStorage.setItem('cart', payload)
+    }
+    setIsMounted(true)
+  }, [preorderedPizzas])
 
   return (
     <div className="header">

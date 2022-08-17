@@ -2,7 +2,11 @@ import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../store'
 import { IPizza } from '../../components/PizzaBlock/PizzaBlock'
+import { getCartFromLS } from '../../utils/getCartFromLS'
+import { calculateTotalPrice } from '../../utils/calculateTotalPrice'
 
+
+const { totalPrice, preorderedPizzas } = getCartFromLS()
 
 interface ICartState {
   totalPrice: number
@@ -10,8 +14,8 @@ interface ICartState {
 }
 
 const initialState: ICartState = {
-  totalPrice: 0,
-  preorderedPizzas: [],
+  totalPrice,
+  preorderedPizzas,
 }
 
 export const cartSlice = createSlice({
@@ -29,9 +33,7 @@ export const cartSlice = createSlice({
         ? samePizza.count++
         : state.preorderedPizzas.push({ ...action.payload, count: 1 })
 
-      state.totalPrice = state.preorderedPizzas.reduce(
-        (sum, pizza) => Math.round((sum + (pizza.currentPrice * pizza.count) + Number.EPSILON) * 100) / 100
-        , 0)
+      state.totalPrice = calculateTotalPrice(state.preorderedPizzas)
     },
     removePizza: (state, action: PayloadAction<IPizza>) => {
       state.preorderedPizzas.find(pizza =>
@@ -40,9 +42,7 @@ export const cartSlice = createSlice({
         pizza.type === action.payload.type
       ).count--
 
-      state.totalPrice = state.preorderedPizzas.reduce(
-        (sum, pizza) => Math.round((sum + (pizza.currentPrice * pizza.count) + Number.EPSILON) * 100) / 100
-        , 0)
+      state.totalPrice = calculateTotalPrice(state.preorderedPizzas)
     },
     removeAllPizzasOfType: (state, action: PayloadAction<IPizza>) => {
       state.preorderedPizzas = state.preorderedPizzas.filter(pizza =>
@@ -51,9 +51,7 @@ export const cartSlice = createSlice({
         pizza.type !== action.payload.type
       )
 
-      state.totalPrice = state.preorderedPizzas.reduce(
-        (sum, pizza) => Math.round((sum + (pizza.currentPrice * pizza.count) + Number.EPSILON) * 100) / 100
-        , 0)
+      state.totalPrice = calculateTotalPrice(state.preorderedPizzas)
     },
     clearCart: (state) => {
       state.preorderedPizzas = []
