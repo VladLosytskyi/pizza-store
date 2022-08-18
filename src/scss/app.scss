@@ -4,6 +4,36 @@
 
 @import './components/all';
 
+// react-toastify
+:root {
+  --toastify-color-transparent: #07bc0c;
+  --toastify-toast-width: 350px;
+}
+
+.Toastify__toast-container {
+  pointer-events: none;
+}
+
+.Toastify__toast {
+  display: flex;
+  align-items: center;
+  pointer-events: all;
+}
+
+.Toastify__toast-body {
+  height: 80px;
+}
+
+.Toastify__toast-theme--colored.Toastify__toast--success {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+}
+
+.Toastify__toast-icon {
+  color: var(--toastify-color-success);
+}
+
+// App
 body {
   background-color: $background;
 }

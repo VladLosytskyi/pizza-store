@@ -1,0 +1,44 @@
+.addedPizzaNotification {
+  height: 80px;
+  display: flex;
+  align-items: center;
+
+
+  .image {
+    position: relative;
+    height: 100px;
+    overflow: hidden;
+    border-radius: 50%;
+    transform: scale(0.5);
+    margin-left: -20px;
+
+    img {
+      width: 110px;
+      height: 110px;
+      margin: -1px -8px 0 0;
+    }
+  }
+
+  .text {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 10px;
+    margin-left: -20px;
+
+    .title {
+      font-weight: 800;
+    }
+
+    .description {
+      font-size: 14px;
+    }
+  }
+
+  .price {
+    margin-left: 10px;
+    font-weight: 700;
+    color: var(--toastify-color-success);
+  }
+}

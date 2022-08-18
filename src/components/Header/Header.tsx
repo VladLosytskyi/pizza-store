@@ -1,5 +1,6 @@
 import { FC, memo, useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import logo from '../../assets/images/pizza-logo.svg'
 import PizzaSearchForm from '../PizzaSearch/PizzaSearchForm'
 import { useAppSelector } from '../../redux-toolkit/hooks'
@@ -38,7 +39,7 @@ const Header: FC = memo(() => {
           </div>
         </Link>
         { location.pathname !== '/cart' && <PizzaSearchForm /> }
-        <Link to="/cart" className="button button--cart">
+        <Link to="/cart" className="button button--cart" onClick={ () => toast.dismiss() }>
           <span>$ { totalPrice }</span>
           <div className="button__delimiter" />
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">

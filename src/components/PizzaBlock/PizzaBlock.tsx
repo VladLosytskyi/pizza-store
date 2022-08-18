@@ -1,6 +1,8 @@
 import { FC, useState } from 'react'
 import { useAppDispatch } from '../../redux-toolkit/hooks'
 import { addPizza } from '../../redux-toolkit/slices/cartSlice'
+import { toast } from 'react-toastify'
+import AddedPizzaNotification from '../AddedPizzaNotification/AddedPizzaNotification'
 
 
 export interface IPizza {
@@ -36,6 +38,18 @@ const PizzaBlock: FC<IPizza> = ({
   const onAddClick = () => {
     setIsGreen(true)
     setTimeout(() => setIsGreen(false), 1000)
+
+    toast.success(
+      <AddedPizzaNotification
+        id={ id }
+        title={ title }
+        imageUrl={ imageUrl }
+        currentPrice={ currentPrice }
+        size={ pizzaSizes[activeSize] }
+        type={ pizzaTypes[activeType] }
+      />
+    )
+
     dispatch(addPizza({
       id,
       title,
