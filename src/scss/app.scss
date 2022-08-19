@@ -48,6 +48,8 @@ body {
   color: #000;
 }
 
+a[href^=tel]{ color: #000; text-decoration:none;}
+
 .wrapper {
   width: calc(100vw - 100px);
   min-height: calc(100vh - 100px);
