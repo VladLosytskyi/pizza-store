@@ -15,7 +15,7 @@ root.render(
     <BrowserRouter>
       <Provider store={ store }>
         <App />
-        <ToastContainer autoClose={ 3000 } theme={ 'colored' } closeButton={ false } hideProgressBar />
+        <ToastContainer autoClose={ 3000 } theme={ 'colored' } closeButton={ false } closeOnClick={false} hideProgressBar />
       </Provider>
     </BrowserRouter>
   </React.StrictMode>
