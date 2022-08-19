@@ -60,7 +60,9 @@
     }
   }
 
-  &:hover {
-    transform: scale(1.03);
+  @media (min-width: 1024px) {
+    &:hover {
+      transform: scale(1.03);
+    }
   }
 }
