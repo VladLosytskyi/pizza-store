@@ -95,7 +95,12 @@ const PizzaBlock: FC<IPizza> = ({
             isGreen
               ? <>
                 <span className="cross" />
-                <span>Added To Cart</span>
+                <span>Added To Cart For <span className="pizza-block__price" style={ {
+                  position: 'relative',
+                  top: '1px',
+                  fontSize: '18px',
+                  fontWeight: 'bold'
+                } }>${ currentPrice }</span></span>
               </>
               : <>
                 <span className="cross" />
