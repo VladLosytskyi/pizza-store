@@ -1,6 +1,6 @@
 # 🍕 Pizza Store
 
-This is an online Pizza Store where you can find pizza for your taste
+This is an online Pizza Store where you can find pizza to your liking 😋.
 
 _P.S. This is a practice project for a portfolio._
 
