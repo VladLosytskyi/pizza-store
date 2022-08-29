@@ -10,7 +10,7 @@ _P.S. This is a practice project for a portfolio._
 * Filter
 * Sort
 * Selecting Parameters
-* Cart
+* Cart (_P.S. Payment functionality is not realized due to the purpose of the project._)
 
 ## 🛠 Stack
 
