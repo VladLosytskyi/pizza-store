@@ -23,5 +23,5 @@ _P.S. This is a practice project for a portfolio._
 
 ## 💨 How to run the project
 
-You can find a build version by this URL: https://pizza-store.vladlosytskyi.vercel.app
+You can find the project at this URL: https://pizza-store.vladlosytskyi.vercel.app
 
